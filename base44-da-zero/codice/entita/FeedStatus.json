@@ -1,0 +1,35 @@
+{
+  "name": "FeedStatus",
+  "type": "object",
+  "description": "Stato di ogni feed: serve a nascondere le testate che non rispondono da 6 ore",
+  "properties": {
+    "url": {
+      "type": "string",
+      "description": "Indirizzo del feed"
+    },
+    "testata": {
+      "type": "string",
+      "description": "Chiave della testata"
+    },
+    "ultimo_ok": {
+      "type": "number",
+      "description": "Ultima lettura riuscita, secondi"
+    },
+    "ultimo_tentativo": {
+      "type": "number",
+      "description": "Ultimo tentativo, secondi"
+    },
+    "errore": {
+      "type": "string",
+      "description": "Errore dell'ultimo tentativo, se c'è"
+    },
+    "articoli": {
+      "type": "number",
+      "description": "Articoli nel feed"
+    }
+  },
+  "required": [
+    "url",
+    "testata"
+  ]
+}

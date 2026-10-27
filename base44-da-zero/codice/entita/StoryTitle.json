@@ -1,0 +1,31 @@
+{
+  "name": "StoryTitle",
+  "type": "object",
+  "description": "Titolo neutro scritto dal modello per una storia seguita da almeno 3 testate",
+  "properties": {
+    "story_id": {
+      "type": "string",
+      "description": "Id della storia (= id del suo primo articolo)"
+    },
+    "n": {
+      "type": "number",
+      "description": "Testate quando è stato scritto"
+    },
+    "titolo": {
+      "type": "string",
+      "description": "Titolo neutro, massimo 90 caratteri"
+    },
+    "sintesi": {
+      "type": "string",
+      "description": "Una frase"
+    },
+    "creato": {
+      "type": "number",
+      "description": "Secondi"
+    }
+  },
+  "required": [
+    "story_id",
+    "titolo"
+  ]
+}

@@ -1,0 +1,497 @@
+/* Il Grande Giornale · stile editoriale da magazine
+   Si attiva con data-style="magazine" sulla radice e vale solo lì: lo stile svizzero resta intatto.
+   Carta calda e il rosso della puntina del logo; Fraunces per titoli e testo lungo, Glacial
+   Indifference per menu ed etichette; copertina a tutta larghezza, moduli di peso diverso,
+   citazioni in corsivo, capolettera, filetti doppi, etichette a ritaglio. Stessa scala di spazi. */
+
+@font-face{font-family:"Fraunces";font-style:normal;font-weight:100 900;font-display:swap;
+  src:url("https://cdn.jsdelivr.net/npm/@fontsource-variable/fraunces@5.3.0/files/fraunces-latin-standard-normal.woff2") format("woff2-variations");
+  unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"Fraunces";font-style:normal;font-weight:100 900;font-display:swap;
+  src:url("https://cdn.jsdelivr.net/npm/@fontsource-variable/fraunces@5.3.0/files/fraunces-latin-ext-standard-normal.woff2") format("woff2-variations");
+  unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:"Fraunces";font-style:italic;font-weight:100 900;font-display:swap;
+  src:url("https://cdn.jsdelivr.net/npm/@fontsource-variable/fraunces@5.3.0/files/fraunces-latin-standard-italic.woff2") format("woff2-variations");
+  unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"Fraunces";font-style:italic;font-weight:100 900;font-display:swap;
+  src:url("https://cdn.jsdelivr.net/npm/@fontsource-variable/fraunces@5.3.0/files/fraunces-latin-ext-standard-italic.woff2") format("woff2-variations");
+  unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+
+/* ---------- Colori: carta da giornale e rosso della puntina ---------- */
+:root[data-style="magazine"]{
+  --bg:#F6F1E7;--surface:#ECE4D4;--fg:#1B1916;--muted:#6F675B;--line:#D8CDB9;--rule:#1B1916;
+  --accent:#B3122E;--accent-ink:#FFFFFF;--acc-text:#A3102A;
+  --serif:"Fraunces",Georgia,"Times New Roman",serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root[data-style="magazine"]:not([data-theme="light"]){
+    --bg:#16130F;--surface:#221E18;--fg:#F1EBDF;--muted:#A69C8B;--line:#3A332A;--rule:#F1EBDF;
+    --accent:#C8283F;--accent-ink:#FFFFFF;--acc-text:#F0707F;color-scheme:dark;
+  }
+}
+:root[data-style="magazine"][data-theme="dark"]{
+  --bg:#16130F;--surface:#221E18;--fg:#F1EBDF;--muted:#A69C8B;--line:#3A332A;--rule:#F1EBDF;
+  --accent:#C8283F;--accent-ink:#FFFFFF;--acc-text:#F0707F;color-scheme:dark;
+}
+
+/* Etichetta a ritaglio: carta strappata, appena storta, come nel logo */
+:root[data-style="magazine"] .chip,
+:root[data-style="magazine"] .tk__lab{
+  clip-path:polygon(0 8%,6% 0,14% 6%,24% 0,35% 7%,47% 1%,58% 6%,70% 0,81% 5%,92% 0,100% 7%,98% 50%,100% 93%,90% 100%,79% 94%,67% 100%,55% 95%,43% 100%,31% 94%,19% 100%,8% 95%,0 100%,2% 50%);
+  padding:var(--s1) var(--s3);transform:rotate(-1.5deg);display:inline-block
+}
+
+/* ---------- Testata della rivista ---------- */
+:root[data-style="magazine"] .top{border-bottom:0}
+:root[data-style="magazine"] .mast__in{justify-content:center;position:relative;padding-block:var(--s4) var(--s3)}
+:root[data-style="magazine"] .sbtn{position:absolute;right:max(var(--margin),env(safe-area-inset-right,0px));border-color:transparent}
+:root[data-style="magazine"] .sbtn:hover{border-color:var(--fg);background:none;color:var(--fg)}
+:root[data-style="magazine"] .nav{border-top:3px double var(--rule);border-bottom:3px double var(--rule)}
+:root[data-style="magazine"] .nav__list{justify-content:safe center;gap:var(--s5)}
+:root[data-style="magazine"] .nav a[aria-current="page"]{box-shadow:inset 0 -2px 0 var(--accent)}
+:root[data-style="magazine"] .nav__sep{display:none}
+:root[data-style="magazine"] .edbar__in{justify-content:safe center}
+:root[data-style="magazine"] .ed.is-on{background:var(--accent);color:var(--accent-ink)}
+
+/* Numero della rivista */
+:root[data-style="magazine"] .issue{display:flex;justify-content:space-between;gap:var(--s3);flex-wrap:wrap;padding-block:var(--s2);margin-top:var(--s3);border-bottom:1px solid var(--rule);font-family:var(--f);font-weight:700;font-size:var(--t-label);line-height:var(--l-label);letter-spacing:.14em;text-transform:uppercase}
+:root[data-style="magazine"] .issue span:nth-child(2){font-family:var(--serif);font-style:italic;font-weight:400;font-size:var(--t-body);letter-spacing:0;text-transform:none}
+:root[data-style="magazine"] .status{text-align:center;padding-top:var(--s3)}
+:root[data-style="magazine"] .chips{justify-content:safe center}
+
+/* Ultim'ora che scorre: striscia di carta, non nastro nero */
+:root[data-style="magazine"] .tk{background:var(--surface);color:var(--fg);border-block:1px solid var(--line)}
+:root[data-style="magazine"] .tk__seq{font-family:var(--serif);font-size:var(--t-body)}
+:root[data-style="magazine"] .tk__s{color:var(--acc-text);opacity:1;font-family:var(--f)}
+
+/* ---------- Prima pagina: copertina a tutta larghezza, poi colonne di peso diverso ---------- */
+:root[data-style="magazine"] .home__main{display:contents}
+:root[data-style="magazine"] .home__main>*{grid-column:1/-1}
+@media (min-width:1024px){
+  :root[data-style="magazine"] .lead{grid-column:1/-1;grid-row:1}
+  :root[data-style="magazine"] .sec--ev{grid-column:1/span 8;grid-row:2}
+  :root[data-style="magazine"] .cifre{grid-column:1/span 8;grid-row:3}
+  :root[data-style="magazine"] .sec--uo{grid-column:1/span 8;grid-row:4}
+  :root[data-style="magazine"] .rail{grid-column:9/span 4;grid-row:2/span 3;align-self:start}
+}
+
+/* Copertina */
+:root[data-style="magazine"] .lead{padding-bottom:var(--s5);border-bottom:3px double var(--rule)}
+@media (min-width:1024px){
+  :root[data-style="magazine"] .lead{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--gutter)}
+  :root[data-style="magazine"] .lead>*{grid-column:1/span 7}
+  :root[data-style="magazine"] .lead>.kick{grid-row:1}
+  :root[data-style="magazine"] .lead>.lead__t{grid-row:2}
+  :root[data-style="magazine"] .lead>.lead__d{grid-row:3}
+  :root[data-style="magazine"] .lead>.srcline{grid-row:4}
+  :root[data-style="magazine"] .lead>.tl{grid-row:5}
+  :root[data-style="magazine"] .lead>.more{grid-row:6}
+  :root[data-style="magazine"] .lead>.takes__h{grid-column:9/span 4;grid-row:1;margin-top:0}
+  :root[data-style="magazine"] .lead>.takes{grid-column:9/span 4;grid-row:2/span 5;align-self:start;grid-template-columns:minmax(0,1fr);margin-top:0}
+}
+:root[data-style="magazine"] .lead__t{font-family:var(--serif);font-weight:700;font-optical-sizing:auto;font-size:clamp(48px,6vw + 16px,124px);line-height:.94;letter-spacing:-.02em;max-width:15ch;margin-top:var(--s4)}
+:root[data-style="magazine"] .lead__t.lead__t--echo{font-size:clamp(30px,2.6vw + 14px,52px);line-height:1;max-width:22ch}
+:root[data-style="magazine"] .lead__d{font-family:var(--serif);font-size:22px;line-height:32px;max-width:36ch;margin-top:var(--s4)}
+:root[data-style="magazine"] .lead__d::first-letter{font-family:var(--serif);font-weight:700;float:left;font-size:5.4em;line-height:.8;margin:.06em var(--s2) 0 0;color:var(--accent)}
+:root[data-style="magazine"] .tl__bar{border-bottom-width:1px}
+:root[data-style="magazine"] .tl__bar i{width:1px}
+:root[data-style="magazine"] .tl__bar i.first{width:3px;margin-left:-1px}
+:root[data-style="magazine"] .more{border-bottom:2px solid var(--accent);font-family:var(--serif);font-style:italic;font-weight:400;font-size:var(--t-h4);letter-spacing:0;text-transform:none}
+
+/* Come lo raccontano: le testate come citazioni */
+:root[data-style="magazine"] .takes__h{font-family:var(--serif);font-style:italic;font-weight:400;font-size:var(--t-h4);letter-spacing:0;text-transform:none;padding-bottom:var(--s2);border-bottom:1px solid var(--rule)}
+:root[data-style="magazine"] .take{border-top:0;border-bottom:1px solid var(--line);padding-block:var(--s3);gap:var(--s1)}
+:root[data-style="magazine"] .take__m{order:2}
+:root[data-style="magazine"] .take__t{order:1;font-family:var(--serif);font-style:italic;font-weight:400;font-size:var(--t-h3);line-height:var(--l-h3)}
+:root[data-style="magazine"] .take__t::before{content:"«"}
+:root[data-style="magazine"] .take__t::after{content:"»"}
+:root[data-style="magazine"] .take__o{order:3}
+:root[data-style="magazine"] .take__go{display:none}
+
+/* Titoli di sezione: corsivo grande sopra un filetto doppio */
+:root[data-style="magazine"] .sec-h,
+:root[data-style="magazine"] .rail__head,
+:root[data-style="magazine"] .eg__h{border-top:3px double var(--rule);padding-top:var(--s3)}
+:root[data-style="magazine"] .sec-h,
+:root[data-style="magazine"] .rail__h,
+:root[data-style="magazine"] .eg__h{font-family:var(--serif);font-style:italic;font-weight:600;font-size:var(--t-h2);line-height:var(--l-h2);letter-spacing:-.01em}
+:root[data-style="magazine"] .sec-h .mono,
+:root[data-style="magazine"] .eg__h .mono{font-style:normal}
+
+/* In evidenza: storie numerate come un sommario */
+:root[data-style="magazine"] .sec--ev .cards{counter-reset:ev 1}
+:root[data-style="magazine"] .card{counter-increment:ev;border-top:1px solid var(--line);padding-top:var(--s3)}
+:root[data-style="magazine"] .card::before{content:counter(ev,decimal-leading-zero);font-family:var(--serif);font-style:italic;font-weight:300;font-size:var(--t-h2);line-height:1;color:var(--accent)}
+:root[data-style="magazine"] .card__t{font-family:var(--serif);font-weight:600;font-size:var(--t-h3);line-height:var(--l-h3);letter-spacing:-.005em}
+:root[data-style="magazine"] .card__s{font-family:var(--serif);font-style:italic}
+
+/* Le cifre del giorno: fascia scura con numeri giganti */
+:root[data-style="magazine"] .cifre{display:block;background:var(--fg);color:var(--bg);padding:var(--s5) var(--s4) var(--s4)}
+:root[data-style="magazine"] .cifre__h{color:var(--bg);opacity:.7;margin-bottom:var(--s3)}
+:root[data-style="magazine"] .cifre__list{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,180px),1fr));gap:var(--s4) var(--gutter)}
+:root[data-style="magazine"] .cifra{display:flex;flex-direction:column;gap:var(--s2);border-top:1px solid color-mix(in srgb,var(--bg) 35%,transparent);padding-top:var(--s2)}
+:root[data-style="magazine"] .cifra__n{font-family:var(--serif);font-weight:700;font-size:clamp(48px,4vw + 16px,72px);line-height:1;color:var(--bg);letter-spacing:-.02em}
+:root[data-style="magazine"] .cifra__n small{font-size:.42em;font-weight:400;font-style:italic;margin-left:var(--s1)}
+:root[data-style="magazine"] .cifra__t{font-family:var(--serif);font-size:var(--t-body);line-height:var(--l-body)}
+:root[data-style="magazine"] .cifra:hover .cifra__t{text-decoration:underline}
+:root[data-style="magazine"] .cifra__s{color:var(--bg);opacity:.6}
+
+/* Ultim'ora come brevi, su due colonne */
+@media (min-width:600px){
+  :root[data-style="magazine"] .sec--uo .rows{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:var(--gutter)}
+  :root[data-style="magazine"] .sec--uo .rows .row:nth-child(-n+2){border-top:0}
+  :root[data-style="magazine"] .sec--uo .row--more{grid-column:1/-1}
+}
+:root[data-style="magazine"] .row{grid-template-columns:var(--s7) minmax(0,1fr)}
+:root[data-style="magazine"] .row__t{font-family:var(--serif);font-weight:500;font-size:19px;line-height:var(--l-body)}
+:root[data-style="magazine"] .row__o,
+:root[data-style="magazine"] .take__o,
+:root[data-style="magazine"] .pp__o{font-family:var(--serif)}
+
+/* Colonna delle prime pagine */
+:root[data-style="magazine"] .pp__t{font-family:var(--serif);font-weight:500;font-size:18px;line-height:var(--l-body)}
+
+/* ---------- Pagine interne ---------- */
+:root[data-style="magazine"] .phead{border-bottom:3px double var(--rule);text-align:center;align-items:center}
+:root[data-style="magazine"] .phead__t{font-family:var(--serif);font-weight:700;font-size:clamp(48px,5vw + 16px,104px);letter-spacing:-.02em}
+:root[data-style="magazine"] .phead__d{font-family:var(--serif);font-style:italic}
+:root[data-style="magazine"] .filt{align-items:center}
+
+/* Storia come articolo di approfondimento: apertura centrata, sommario in corsivo */
+:root[data-style="magazine"] .story__h{align-items:center;text-align:center}
+:root[data-style="magazine"] .story__h .kick{justify-content:center}
+:root[data-style="magazine"] .story__t{font-family:var(--serif);font-weight:700;font-size:clamp(44px,5vw + 16px,108px);line-height:.96;letter-spacing:-.02em;max-width:18ch}
+:root[data-style="magazine"] .story__h .lead__d{font-style:italic;max-width:44ch;margin-inline:auto}
+:root[data-style="magazine"] .story__h .lead__d::first-letter{float:none;font-size:inherit;font-weight:inherit;margin:0;color:inherit}
+:root[data-style="magazine"] .story__h .tl{width:100%;margin-inline:auto}
+:root[data-style="magazine"] .firstline{font-family:var(--serif);font-style:italic}
+:root[data-style="magazine"] .tabs{border-top:3px double var(--rule);justify-content:safe center}
+:root[data-style="magazine"] .voices{max-width:760px;margin-inline:auto;width:100%}
+:root[data-style="magazine"] .voice{border-top:1px solid var(--line);padding-block:var(--s5)}
+:root[data-style="magazine"] .voice__t{font-family:var(--serif);font-style:italic;font-weight:400;font-size:clamp(24px,1.5vw + 16px,32px);line-height:1.25}
+:root[data-style="magazine"] .voice__t::before{content:"«"}
+:root[data-style="magazine"] .voice__t::after{content:"»"}
+:root[data-style="magazine"] .voice__m{order:2}
+:root[data-style="magazine"] .voice__t{order:1}
+:root[data-style="magazine"] .voice .row__o{order:3;font-family:var(--serif)}
+:root[data-style="magazine"] .voice__d{order:4;font-family:var(--serif)}
+:root[data-style="magazine"] .voice__go{order:5}
+
+/* Edicola, ricerca, pagine di testo */
+:root[data-style="magazine"] .paper__n{font-family:var(--serif);font-weight:600;font-size:var(--t-h3);line-height:var(--l-h3)}
+:root[data-style="magazine"] .paper__l{font-family:var(--serif)}
+:root[data-style="magazine"] .sform input{font-family:var(--serif);font-style:italic;font-weight:400;border-bottom:3px double var(--rule)}
+:root[data-style="magazine"] .prose{margin-inline:auto}
+:root[data-style="magazine"] .prose p{font-family:var(--serif);font-size:19px;line-height:32px}
+:root[data-style="magazine"] .prose h2{font-family:var(--serif);font-style:italic;font-weight:600}
+:root[data-style="magazine"] .empty{border-top:3px double var(--rule)}
+:root[data-style="magazine"] .empty__t{font-family:var(--serif);font-weight:600}
+:root[data-style="magazine"] .btn{background:var(--accent);color:var(--accent-ink)}
+
+/* Scheda Analisi come dossier */
+:root[data-style="magazine"] .an{margin-inline:auto;width:100%}
+:root[data-style="magazine"] .an__h{font-family:var(--serif);font-weight:600;font-size:var(--t-h2);line-height:var(--l-h2);border-top:3px double var(--rule);padding-top:var(--s3);grid-template-columns:var(--s7) minmax(0,1fr)}
+:root[data-style="magazine"] .an__h .mono{font-family:var(--serif);font-style:italic;font-weight:300;font-size:var(--t-h2);line-height:var(--l-h2);letter-spacing:0}
+:root[data-style="magazine"] .an__sum{font-family:var(--serif);font-size:22px;line-height:34px}
+:root[data-style="magazine"] .an__sum::first-letter{font-weight:700;float:left;font-size:4.6em;line-height:.8;margin:.06em var(--s2) 0 0;color:var(--accent)}
+:root[data-style="magazine"] .cg__t{font-family:var(--serif);font-weight:500;font-size:var(--t-h4);line-height:28px}
+:root[data-style="magazine"] .proofbox{background:none;border-left:3px solid var(--accent)}
+:root[data-style="magazine"] .proofbox__q{font-family:var(--serif);font-size:var(--t-h3);line-height:var(--l-h3)}
+:root[data-style="magazine"] .nt__v b{font-family:var(--serif);font-size:var(--t-h3);line-height:var(--l-h3)}
+:root[data-style="magazine"] .nt__p,
+:root[data-style="magazine"] .lex,
+:root[data-style="magazine"] .an__foot{font-family:var(--serif)}
+:root[data-style="magazine"] .an__foot{border-top:3px double var(--rule);font-style:italic}
+
+/* Piede */
+:root[data-style="magazine"] .foot{border-top:3px double var(--rule)}
+:root[data-style="magazine"] .foot__about p{font-family:var(--serif);font-style:italic}
+
+/* ---------- Telefono ---------- */
+@media (max-width:599px){
+  :root[data-style="magazine"] .mast__in{justify-content:flex-start;padding-block:var(--s2)}
+  :root[data-style="magazine"] .sbtn{border-color:var(--fg)}
+  :root[data-style="magazine"] .issue{justify-content:flex-start}
+  :root[data-style="magazine"] .issue span:nth-child(2){order:3;width:100%}
+  :root[data-style="magazine"] .status{text-align:left}
+  :root[data-style="magazine"] .lead__d{font-size:19px;line-height:28px}
+  :root[data-style="magazine"] .cifre{padding:var(--s4) var(--s3) var(--s3)}
+  :root[data-style="magazine"] .cifre__list{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+
+/* La mia edicola */
+:root[data-style="magazine"] .pref{border-top:3px double var(--rule)}
+:root[data-style="magazine"] .pref__h{font-family:var(--serif);font-style:italic;font-weight:600;font-size:var(--t-h2);line-height:var(--l-h2)}
+:root[data-style="magazine"] .pchoice{font-family:var(--serif);font-weight:500;font-size:17px}
+:root[data-style="magazine"] .ptheme{font-family:var(--serif);font-style:italic;font-weight:500}
+:root[data-style="magazine"] .ptheme__form input{font-family:var(--serif);font-style:italic;font-size:22px;border-bottom:3px double var(--rule)}
+:root[data-style="magazine"] .pchoice,:root[data-style="magazine"] .ptheme,:root[data-style="magazine"] .pfav{clip-path:none}
+:root[data-style="magazine"] .mine .sec-h{border-top:3px double var(--rule)}
+
+/* Foto: incorniciate come ritagli, leggero viraggio caldo per stare sulla carta */
+:root[data-style="magazine"] .pic img{filter:sepia(.12) saturate(.92) contrast(1.02)}
+:root[data-style="magazine"] .pic figcaption{font-family:var(--serif);font-style:italic;letter-spacing:0;text-transform:none;font-weight:400;font-size:var(--t-small)}
+:root[data-style="magazine"] .pic--lead img{box-shadow:0 1px 0 var(--line),0 12px 28px -18px rgba(0,0,0,.45)}
+:root[data-style="magazine"] .card .pic{order:-1}
+:root[data-style="magazine"] .card.has-img::before{position:absolute;margin:var(--s2) 0 0 var(--s2);background:var(--bg);padding:0 var(--s2);z-index:1}
+:root[data-style="magazine"] .card{position:relative}
+:root[data-style="magazine"] .pic--voice{order:2}
+@media (min-width:1024px){
+  :root[data-style="magazine"] .lead>.pic--lead{grid-row:3}
+  :root[data-style="magazine"] .lead>.lead__d{grid-row:4}
+  :root[data-style="magazine"] .lead>.srcline{grid-row:5}
+  :root[data-style="magazine"] .lead>.tl{grid-row:6}
+  :root[data-style="magazine"] .lead>.more{grid-row:7}
+  :root[data-style="magazine"] .lead>.takes{grid-row:2/span 6}
+}
+:root[data-style="magazine"] .row.has-img{grid-template-columns:var(--s7) minmax(0,1fr) 96px}
+:root[data-style="magazine"] .row__img img{width:96px;height:72px}
+@media (max-width:599px){
+  :root[data-style="magazine"] .row.has-img{grid-template-columns:var(--s7) minmax(0,1fr) 80px}
+  :root[data-style="magazine"] .row__img img{width:80px;height:60px}
+}
+
+/* ---------- Cornici delle foto: passe-partout di carta, filetto d'inchiostro, ombra da ritaglio ---------- */
+:root[data-style="magazine"]{--frame:#FBF7EE;--frame-rule:#CDBFA6;--frame-shadow:rgba(60,40,20,.35)}
+@media (prefers-color-scheme: dark){
+  :root[data-style="magazine"]:not([data-theme="light"]){--frame:#26211A;--frame-rule:#4A4136;--frame-shadow:rgba(0,0,0,.7)}
+}
+:root[data-style="magazine"][data-theme="dark"]{--frame:#26211A;--frame-rule:#4A4136;--frame-shadow:rgba(0,0,0,.7)}
+
+:root[data-style="magazine"] .pic{background:var(--frame);padding:10px 10px 8px;border:1px solid var(--frame-rule);
+  box-shadow:0 1px 0 var(--frame-rule),0 16px 28px -20px var(--frame-shadow);gap:var(--s1)}
+:root[data-style="magazine"] .pic img{outline:1px solid var(--frame-rule);outline-offset:-1px;box-shadow:none!important}
+:root[data-style="magazine"] .pic figcaption{padding-inline:2px;color:var(--muted)}
+:root[data-style="magazine"] .pic--lead{padding:14px 14px 10px}
+:root[data-style="magazine"] .card .pic{margin-bottom:var(--s2)}
+:root[data-style="magazine"] .row__img{background:var(--frame);padding:4px;border:1px solid var(--frame-rule);box-shadow:0 10px 18px -14px var(--frame-shadow)}
+:root[data-style="magazine"] .row__img img{outline:1px solid var(--frame-rule);outline-offset:-1px}
+:root[data-style="magazine"] .row.has-img{grid-template-columns:var(--s7) minmax(0,1fr) 106px}
+@media (max-width:599px){:root[data-style="magazine"] .row.has-img{grid-template-columns:var(--s7) minmax(0,1fr) 90px}}
+
+/* Copertina: foto incorniciata come una tavola di rivista, titolo centrato sotto */
+:root[data-style="magazine"] .hero{margin-top:var(--s4)}
+:root[data-style="magazine"] .hero__frame{background:var(--frame);border-block:1px solid var(--frame-rule);box-shadow:0 22px 40px -30px var(--frame-shadow)}
+:root[data-style="magazine"] .hero__track{inset:16px clamp(16px,3vw,40px);outline:1px solid var(--frame-rule);outline-offset:0}
+:root[data-style="magazine"] .hero__slide img{filter:sepia(.1) saturate(.94) contrast(1.03)}
+:root[data-style="magazine"] .hero__progress{left:clamp(16px,3vw,40px);right:clamp(16px,3vw,40px);bottom:16px}
+:root[data-style="magazine"] .hero__nav{border-radius:50%;background:var(--frame);border-color:var(--frame-rule);font-family:var(--serif)}
+:root[data-style="magazine"] .hero__nav--prev{left:clamp(28px,4vw,64px)}
+:root[data-style="magazine"] .hero__nav--next{right:clamp(28px,4vw,64px)}
+:root[data-style="magazine"] .hero__cap{text-align:center}
+:root[data-style="magazine"] .hero__cap .kick{justify-content:center}
+:root[data-style="magazine"] .hero__t{font-family:var(--serif);font-optical-sizing:auto;font-size:clamp(36px,4.6vw + 12px,104px);line-height:.96;letter-spacing:-.02em;max-width:20ch;margin-inline:auto}
+:root[data-style="magazine"] .hero__credit{font-family:var(--serif);font-style:italic;letter-spacing:0;text-transform:none;font-weight:400;font-size:var(--t-small)}
+:root[data-style="magazine"] .hero__ctrl{border-top:3px double var(--rule);justify-content:center;gap:var(--s5)}
+@media (max-width:599px){
+  :root[data-style="magazine"] .hero__track{inset:8px}
+  :root[data-style="magazine"] .hero__progress{left:8px;right:8px;bottom:8px}
+}
+
+/* Pagina del paese */
+:root[data-style="magazine"] :is(.country__t,.cs__t,.country__lt,.iris__t){font-family:var(--serif)}
+:root[data-style="magazine"] .country__h{border-bottom:3px double var(--rule)}
+
+/* ---------- Globo: tavola d'atlante su carta ---------- */
+:root[data-style="magazine"]{
+  --g-ocean:#D8CBB0;--g-grat:rgba(27,25,22,.09);--g-land:#FBF7EE;--g-low:#E2AE9C;--g-high:#B3122E;--g-border:#7A7062;
+  --g-sel:#1B1916;--g-rim:#1B1916;--g-label:#1B1916;--g-label-ink:#F6F1E7;--g-sel-ink:#F6F1E7;
+  --gb-bg:var(--frame);--gb-fg:var(--fg);--gb-hi:var(--acc-text);--gb-ink:var(--fg);--gb-btn:var(--frame);--gb-btn-ink:var(--fg);
+  --gb-font:var(--serif);--gb-bar:var(--frame-rule);--gb-bar1:var(--accent);--gb-tip:var(--fg);--gb-tip-ink:var(--bg);--gb-pill:999px;--gb-btn-shadow:none;
+}
+@media (prefers-color-scheme: dark){
+  :root[data-style="magazine"]:not([data-theme="light"]){--g-ocean:#2B251D;--g-grat:rgba(241,235,223,.07);--g-land:#1E1A15;--g-low:#7C3B33;--g-high:#C8283F;
+    --g-border:#8A7F6E;--g-sel:#F1EBDF;--g-rim:#F1EBDF;--g-label:#F1EBDF;--g-label-ink:#16130F;--g-sel-ink:#16130F}
+}
+:root[data-style="magazine"][data-theme="dark"]{--g-ocean:#2B251D;--g-grat:rgba(241,235,223,.07);--g-land:#1E1A15;--g-low:#7C3B33;--g-high:#C8283F;
+  --g-border:#8A7F6E;--g-sel:#F1EBDF;--g-rim:#F1EBDF;--g-label:#F1EBDF;--g-label-ink:#16130F;--g-sel-ink:#16130F}
+:root[data-style="magazine"] .globe{border-top:3px double var(--rule);border-bottom:3px double var(--rule);box-shadow:0 22px 40px -30px var(--frame-shadow)}
+:root[data-style="magazine"] .globe__t{font-style:italic;font-weight:600;letter-spacing:-.02em}
+:root[data-style="magazine"] .globe__t em{font-style:normal;font-weight:700}
+:root[data-style="magazine"] .globe__help{font-family:var(--serif);font-style:italic}
+:root[data-style="magazine"] .globe__stage{padding:clamp(8px,1.4vw,18px);border:1px solid var(--frame-rule);border-radius:50%;background:var(--bg)}
+:root[data-style="magazine"] .globe__ctrl button{font-family:var(--serif);font-weight:400;border-width:1px;border-color:var(--frame-rule)}
+:root[data-style="magazine"] .gchip{font-family:var(--serif);border-color:var(--frame-rule)}
+:root[data-style="magazine"] .gchip:hover{border-color:var(--fg)}
+:root[data-style="magazine"] .ginfo__t{font-style:italic;font-weight:600}
+:root[data-style="magazine"] .ginfo__n div{border-top:3px double var(--rule)}
+:root[data-style="magazine"] .ginfo__n dd{font-weight:400;font-style:italic}
+:root[data-style="magazine"] .ginfo__top{font-weight:500;font-style:italic;border-left-width:3px}
+
+/* Transizione e pagina del paese */
+:root[data-style="magazine"] .iris__t{font-style:italic;font-weight:600}
+:root[data-style="magazine"] .country__h{text-align:center;align-items:center;padding-bottom:var(--s5)}
+:root[data-style="magazine"] .country__t{font-style:italic;font-weight:600;letter-spacing:-.02em}
+:root[data-style="magazine"] .country__d{font-family:var(--serif);font-style:italic}
+:root[data-style="magazine"] .cs__head h2{font-family:var(--serif);font-style:italic;font-weight:400;font-size:var(--t-h3);letter-spacing:0;text-transform:none}
+:root[data-style="magazine"] .cs__btn{border-radius:50%;border-color:var(--frame-rule);background:var(--frame);font-family:var(--serif)}
+:root[data-style="magazine"] .cs__card{border-top:3px double var(--rule);padding-top:var(--s3)}
+:root[data-style="magazine"] .cs__img{background:var(--frame);padding:12px 12px 10px;border:1px solid var(--frame-rule);box-shadow:0 16px 28px -20px var(--frame-shadow)}
+:root[data-style="magazine"] .cs__img img{outline:1px solid var(--frame-rule);outline-offset:-1px;filter:sepia(.12) saturate(.92) contrast(1.02)}
+:root[data-style="magazine"] .cs__t{font-weight:700}
+:root[data-style="magazine"] .cs__s{font-family:var(--serif);font-style:italic}
+:root[data-style="magazine"] .country__list li{border-top-color:var(--line)}
+:root[data-style="magazine"] .country__lt{font-weight:600}
+
+/* Scheda Analisi a capitoli */
+:root[data-style="magazine"]{--ax-alt:var(--frame)}
+:root[data-style="magazine"] .ax__t,:root[data-style="magazine"] .ax__big{font-style:italic;font-weight:600;letter-spacing:-.015em}
+:root[data-style="magazine"] .ax__quote{font-style:italic;border-left-width:3px}
+:root[data-style="magazine"] .ax__card,:root[data-style="magazine"] .ax__metric{border-top:3px double var(--rule);box-shadow:0 16px 28px -22px var(--frame-shadow)}
+:root[data-style="magazine"] .ax__ct,:root[data-style="magazine"] .ax__gaps li{font-weight:500}
+:root[data-style="magazine"] .ax__word{font-style:italic;font-weight:500}
+:root[data-style="magazine"] .ax__tile{border-top:3px double var(--rule)}
+:root[data-style="magazine"] .ax__tile .ax-n{font-style:italic;font-weight:400}
+:root[data-style="magazine"] .ax__lead,:root[data-style="magazine"] .ax__say,:root[data-style="magazine"] .ax-wait__steps{font-family:var(--serif)}
+
+/* ======================================================================
+   Magazine moderno: nero come primario, arancione come secondario.
+   Caratteri come sul sito del Grande Giornale: Newsreader per i titoli (dritto, sottile, stretto),
+   Inter per il testo, JetBrains Mono per le etichette. Queste regole vengono dopo le precedenti
+   e le aggiornano; la struttura della pagina resta quella del magazine.
+   ====================================================================== */
+@font-face{font-family:"Newsreader";font-style:normal;font-weight:200 800;font-display:swap;
+  src:url("https://cdn.jsdelivr.net/npm/@fontsource-variable/newsreader@5.2.6/files/newsreader-latin-wght-normal.woff2") format("woff2-variations")}
+@font-face{font-family:"Newsreader";font-style:italic;font-weight:200 800;font-display:swap;
+  src:url("https://cdn.jsdelivr.net/npm/@fontsource-variable/newsreader@5.2.6/files/newsreader-latin-wght-italic.woff2") format("woff2-variations")}
+@font-face{font-family:"Inter";font-style:normal;font-weight:100 900;font-display:swap;
+  src:url("https://cdn.jsdelivr.net/npm/@fontsource-variable/inter@5.2.6/files/inter-latin-wght-normal.woff2") format("woff2-variations")}
+@font-face{font-family:"JetBrains Mono";font-style:normal;font-weight:100 800;font-display:swap;
+  src:url("https://cdn.jsdelivr.net/npm/@fontsource-variable/jetbrains-mono@5.2.6/files/jetbrains-mono-latin-wght-normal.woff2") format("woff2-variations")}
+
+:root[data-style="magazine"]{
+  --bg:#F6F5F1;--surface:#ECEAE4;--fg:#0D0D0D;--muted:#5F5E59;--line:#DAD7CF;--rule:#0D0D0D;
+  --accent:#F26A1B;--accent-ink:#0D0D0D;--acc-text:#B4470C;
+  --serif:"Newsreader",Georgia,"Times New Roman",serif;
+  --f:"Inter",ui-sans-serif,system-ui,-apple-system,"Helvetica Neue",Arial,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  --frame:#FFFFFF;--frame-rule:#D6D3CB;--frame-shadow:rgba(0,0,0,.18);
+  /* Globo nero con i paesi arancioni */
+  --g-ocean:#111111;--g-grat:rgba(255,255,255,.07);--g-land:#2F2F2F;--g-low:#F7A46E;--g-high:#F26A1B;--g-border:#111111;
+  --g-sel:#FFFFFF;--g-rim:#0D0D0D;--g-label:#F6F5F1;--g-label-ink:#0D0D0D;--g-sel-ink:#0D0D0D;
+  --gb-bar:var(--fg);--gb-bar1:var(--accent);--gb-pill:0;
+  /* Scheda Analisi: apertura nera, numeri arancioni */
+  --ax-hero:#0D0D0D;--ax-hero-ink:#F6F5F1;--ax-alt:#FFFFFF;
+  --ax-c1:#F26A1B;--ax-c2:#0D0D0D;--ax-c3:#F7A46E;--ax-c4:#6B6A66;--ax-c5:#FBD3B5;--ax-c6:#B5B3AD;--ax-c7:var(--muted);
+}
+@media (prefers-color-scheme: dark){
+  :root[data-style="magazine"]:not([data-theme="light"]){
+    --bg:#0B0B0B;--surface:#161616;--fg:#F2F2F0;--muted:#A3A29D;--line:#2B2B2B;--rule:#F2F2F0;
+    --accent:#FF7A2E;--accent-ink:#0B0B0B;--acc-text:#FF8A45;
+    --frame:#141414;--frame-rule:#2E2E2E;--frame-shadow:rgba(0,0,0,.6);
+    --g-ocean:#1B1B1B;--g-grat:rgba(255,255,255,.06);--g-land:#303030;--g-border:#0B0B0B;--g-rim:#F2F2F0;
+    --ax-hero:#000000;--ax-alt:#141414;--ax-c2:#F2F2F0;
+  }
+}
+:root[data-style="magazine"][data-theme="dark"]{
+  --bg:#0B0B0B;--surface:#161616;--fg:#F2F2F0;--muted:#A3A29D;--line:#2B2B2B;--rule:#F2F2F0;
+  --accent:#FF7A2E;--accent-ink:#0B0B0B;--acc-text:#FF8A45;
+  --frame:#141414;--frame-rule:#2E2E2E;--frame-shadow:rgba(0,0,0,.6);
+  --g-ocean:#1B1B1B;--g-grat:rgba(255,255,255,.06);--g-land:#303030;--g-border:#0B0B0B;--g-rim:#F2F2F0;
+  --ax-hero:#000000;--ax-alt:#141414;--ax-c2:#F2F2F0;
+}
+
+/* Scrittura: titoli dritti e sottili, testo in Inter, etichette in mono */
+:root[data-style="magazine"] body{font-family:var(--f);font-size:16px;line-height:26px}
+:root[data-style="magazine"] .mono,
+:root[data-style="magazine"] .issue,
+:root[data-style="magazine"] .nav a{font-family:var(--mono);font-weight:500;font-size:10.5px;letter-spacing:.16em}
+:root[data-style="magazine"] :is(.lead__t,.story__t,.phead__t,.hero__t,.card__t,.sec-h,.rail__h,.eg__h,.globe__t,.ginfo__t,.country__t,.cs__t,
+  .country__lt,.pref__h,.an__h,.ax__t,.ax__big,.ax__ct,.ax__mt,.ax__wt,.cifra__n,.empty__t,.paper__n,.voice__t,.take__t,.iris__t,.prose h2){
+  font-family:var(--serif);font-style:normal;font-weight:400;letter-spacing:-.025em}
+:root[data-style="magazine"] :is(.lead__d,.card__s,.phead__d,.firstline,.row__t,.pp__t,.tk__seq,.cifra__t,.globe__help,.country__d,.cs__s,
+  .ax__lead,.ax__say,.ax-wait__steps,.prose p,.foot__about p,.hero__credit,.pic figcaption,.voice__d,.paper__l,.sform input){font-family:var(--f);font-style:normal}
+:root[data-style="magazine"] .row__t,:root[data-style="magazine"] .pp__t{font-weight:500;font-size:16px;line-height:24px}
+:root[data-style="magazine"] .lead__t{font-weight:400;letter-spacing:-.03em}
+:root[data-style="magazine"] .sec-h,:root[data-style="magazine"] .rail__h,:root[data-style="magazine"] .eg__h{font-size:clamp(26px,1vw + 18px,34px)}
+:root[data-style="magazine"] .sec-h .mono,:root[data-style="magazine"] .eg__h .mono{font-size:10.5px}
+
+/* Filetti: singoli e netti invece che doppi */
+/* Solo il lato che ha già il filetto: cambiare border-style su tutti i lati disegnerebbe una cornice */
+:root[data-style="magazine"] :is(.sec-h,.rail__head,.eg__h,.tabs,.foot,.empty,.pref,.an__h,.an__foot,.cs__card,.hero__ctrl,.globe){border-top-style:solid}
+:root[data-style="magazine"] :is(.lead,.phead,.country__h,.globe){border-bottom-style:solid}
+:root[data-style="magazine"] .nav{border-top:1px solid var(--rule);border-bottom:1px solid var(--line)}
+:root[data-style="magazine"] .nav a[aria-current="page"]{box-shadow:inset 0 -2px 0 var(--accent)}
+:root[data-style="magazine"] :is(.sec-h,.rail__head,.eg__h){border-top-width:2px}
+:root[data-style="magazine"] .lead{border-bottom-width:1px}
+:root[data-style="magazine"] .globe{border-top-width:2px;border-bottom-width:1px;box-shadow:none}
+
+/* Etichette: rettangoli arancioni, non più ritagli storti */
+:root[data-style="magazine"] .chip,:root[data-style="magazine"] .tk__lab{clip-path:none;transform:none;padding:2px var(--s2);font-family:var(--mono);font-weight:600;letter-spacing:.14em;background:var(--accent);color:var(--accent-ink)}
+:root[data-style="magazine"] .ed.is-on{background:var(--fg);color:var(--bg)}
+:root[data-style="magazine"] .tk{background:var(--fg);color:var(--bg);border-block:0}
+:root[data-style="magazine"] .tk__s{color:var(--accent)}
+
+/* Citazioni e numeri in arancione, senza corsivo */
+:root[data-style="magazine"] .take__t::before,:root[data-style="magazine"] .voice__t::before{content:"«";color:var(--accent)}
+:root[data-style="magazine"] .take__t::after,:root[data-style="magazine"] .voice__t::after{content:"»";color:var(--accent)}
+:root[data-style="magazine"] .card::before{font-family:var(--mono);font-style:normal;font-weight:500;font-size:13px;color:var(--acc-text)}
+:root[data-style="magazine"] .lead__d::first-letter{font-family:var(--serif);font-weight:400;color:var(--accent)}
+:root[data-style="magazine"] .cifre{background:var(--fg);color:var(--bg)}
+:root[data-style="magazine"] .cifra__n{font-weight:300}
+:root[data-style="magazine"] .cifra__n small{color:var(--accent);font-style:normal}
+:root[data-style="magazine"] .more{font-family:var(--mono);font-style:normal;font-size:11px;letter-spacing:.14em;text-transform:uppercase;border-bottom-color:var(--accent)}
+:root[data-style="magazine"] .takes__h{font-family:var(--mono);font-style:normal;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase}
+
+/* Foto: colori veri, cornice sottile e netta */
+:root[data-style="magazine"] :is(.pic img,.hero__slide img,.cs__img img){filter:none}
+:root[data-style="magazine"] .pic{padding:0;border:0;box-shadow:none;background:none}
+:root[data-style="magazine"] .pic img{outline:0}
+:root[data-style="magazine"] .row__img{padding:0;border:0;box-shadow:none}
+:root[data-style="magazine"] .cs__img{padding:0;border:0;box-shadow:none}
+
+/* La prima notizia: foto grande a tutta larghezza, titolo sopra la foto (come sul sito) */
+.lead__cover{position:relative;display:block;aspect-ratio:21/9;overflow:hidden;background:#111;color:#FFF}
+.lead__cover img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 1.2s cubic-bezier(.2,.8,.2,1)}
+.lead__cover:hover img{transform:scale(1.03)}
+.lead__cover::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 18%,rgba(0,0,0,.5) 48%,rgba(0,0,0,.9) 100%),
+  linear-gradient(90deg,rgba(0,0,0,.45),rgba(0,0,0,0) 65%)}
+.lead__over{position:absolute;left:0;right:0;bottom:0;z-index:1;padding:clamp(16px,3vw,48px);display:flex;flex-direction:column;gap:var(--s3);text-shadow:0 1px 12px rgba(0,0,0,.45)}
+.lead__cover .kick .mono{color:rgba(255,255,255,.85)}
+:root[data-style="magazine"] .lead__cover .lead__t{color:#FFF;font-size:clamp(32px,3.6vw + 14px,72px);line-height:1.02;max-width:22ch;margin:0}
+:root[data-style="magazine"] .lead__cover .lead__d{color:rgba(255,255,255,.82);font-size:17px;line-height:26px;max-width:62ch;margin:0}
+:root[data-style="magazine"] .lead__cover .lead__d::first-letter{float:none;font-size:inherit;color:inherit;margin:0;font-weight:inherit}
+.lead__cover.no-img{aspect-ratio:auto;min-height:340px}
+.lead__credit{color:var(--muted);margin-top:var(--s2)}
+@media (min-width:1024px){
+  :root[data-style="magazine"] .lead--cover>.lead__cover{grid-column:1/-1;grid-row:1}
+  :root[data-style="magazine"] .lead--cover>.lead__credit{grid-column:1/-1;grid-row:2}
+  :root[data-style="magazine"] .lead--cover>.srcline{grid-row:3}
+  :root[data-style="magazine"] .lead--cover>.tl{grid-row:4}
+  :root[data-style="magazine"] .lead--cover>.more{grid-row:5}
+  :root[data-style="magazine"] .lead--cover>.takes__h{grid-column:9/span 4;grid-row:3;margin-top:var(--s3)}
+  :root[data-style="magazine"] .lead--cover>.takes{grid-column:9/span 4;grid-row:4/span 3}
+}
+@media (max-width:1023px){.lead__cover{aspect-ratio:16/10}}
+@media (max-width:599px){.lead__cover{aspect-ratio:4/5}}
+@media (prefers-reduced-motion:reduce){.lead__cover img{transition:none}}
+
+/* Internazionale: il nome in grande, la firma del giornale sotto */
+:root[data-style="magazine"] .phead--intl .phead__t{font-size:clamp(64px,8vw + 16px,168px);line-height:.92;letter-spacing:-.04em}
+
+/* Logo: il nome in Newsreader come sul sito, il motto in mono */
+:root[data-style="magazine"] .logo{align-items:center;text-align:center;gap:.45em}
+:root[data-style="magazine"] .logo__name{font-family:var(--serif);font-weight:400;font-size:clamp(34px,3vw + 20px,72px);letter-spacing:-.02em;text-transform:none;margin-right:0}
+:root[data-style="magazine"] .logo__tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase}
+:root[data-style="magazine"] .logo__tag::before{width:6px;height:6px;border-radius:50%}
+:root[data-style="magazine"] .logo--sm{align-items:flex-start;text-align:left}
+:root[data-style="magazine"] .logo--sm .logo__name{font-size:30px}
+@media (max-width:599px){
+  :root[data-style="magazine"] .logo{align-items:flex-start;text-align:left}
+  :root[data-style="magazine"] .logo__name{font-size:28px}
+  :root[data-style="magazine"] .logo__tag{font-size:9px;letter-spacing:.14em}
+}
+
+/* Edicola moderna */
+:root[data-style="magazine"] .eg__h{border-top-width:1px;padding-top:var(--s4)}
+:root[data-style="magazine"] :is(.eg__name,.ed-stats dd,.paper__n){font-family:var(--serif);font-weight:400;font-style:normal}
+:root[data-style="magazine"] .ed-stats dt,:root[data-style="magazine"] .eg__cc,:root[data-style="magazine"] .paper__secs span,:root[data-style="magazine"] .ed-idx__b span{font-family:var(--mono)}
+:root[data-style="magazine"] .eg__cc{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+:root[data-style="magazine"] .paper__n{font-size:24px}
+
+/* Invito alla lettura */
+:root[data-style="magazine"] :is(.read__name,.read__t){font-family:var(--serif);font-weight:400}
+:root[data-style="magazine"] .read__go{font-family:var(--mono);font-weight:600;font-size:13px;letter-spacing:.14em;text-transform:uppercase}
+:root[data-style="magazine"] .read__go span{color:var(--accent)}
+:root[data-style="magazine"] .read__go:hover span,:root[data-style="magazine"] .read__go:focus-visible span{color:inherit}

@@ -1,0 +1,87 @@
+{
+  "name": "Article",
+  "type": "object",
+  "description": "Un articolo letto dal feed di una testata. Le storie non si salvano: le calcola la funzione giornale.",
+  "properties": {
+    "aid": {
+      "type": "string",
+      "description": "Id dell'articolo: i primi 12 caratteri dello SHA-1 dell'URL canonico"
+    },
+    "testata": {
+      "type": "string",
+      "description": "Chiave della testata (es. lemonde)"
+    },
+    "url": {
+      "type": "string",
+      "description": "Link all'articolo originale, senza parametri di tracciamento"
+    },
+    "titolo": {
+      "type": "string",
+      "description": "Titolo come nel feed"
+    },
+    "titolo_it": {
+      "type": "string",
+      "description": "Titolo in italiano (uguale al titolo per le testate italiane, tradotto per le altre)"
+    },
+    "titolo_originale": {
+      "type": "string",
+      "description": "Titolo in lingua originale, solo per le testate straniere"
+    },
+    "estratto": {
+      "type": "string",
+      "description": "Estratto del feed, testo semplice, al massimo 1000 caratteri"
+    },
+    "ts": {
+      "type": "number",
+      "description": "Pubblicazione, secondi dal 1970 (UTC)"
+    },
+    "letto": {
+      "type": "number",
+      "description": "Quando è stato letto la prima volta, secondi"
+    },
+    "sezione": {
+      "type": "string",
+      "enum": [
+        "italia",
+        "esteri",
+        "economia",
+        "sport",
+        "cultura",
+        "scienza"
+      ],
+      "description": "Sezione (esteri = Internazionale)"
+    },
+    "luogo": {
+      "type": "string",
+      "description": "Paese di cui parla, in italiano (es. Venezuela); vuoto se non riconosciuto"
+    },
+    "tipo": {
+      "type": "string",
+      "enum": [
+        "notizia",
+        "live",
+        "opinione",
+        "bollettino",
+        "anteprima"
+      ]
+    },
+    "lingua": {
+      "type": "string",
+      "description": "Lingua della testata: it, en, fr, es, de, pt"
+    },
+    "immagine": {
+      "type": "string",
+      "description": "Indirizzo della foto dichiarata dal feed (non si copia)"
+    }
+  },
+  "required": [
+    "aid",
+    "testata",
+    "url",
+    "titolo",
+    "ts",
+    "sezione",
+    "tipo",
+    "lingua"
+  ]
+}

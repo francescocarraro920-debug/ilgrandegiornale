@@ -1,0 +1,33 @@
+{
+  "name": "EditionSnapshot",
+  "type": "object",
+  "description": "La prima pagina di un'edizione chiusa, salvata com'era",
+  "properties": {
+    "giorno": {
+      "type": "string",
+      "description": "AAAA-MM-GG, ora di Roma"
+    },
+    "edizione": {
+      "type": "string",
+      "enum": [
+        "notte",
+        "mattina",
+        "pomeriggio",
+        "sera"
+      ]
+    },
+    "salvato": {
+      "type": "number",
+      "description": "Secondi"
+    },
+    "payload": {
+      "type": "object",
+      "description": "La vista front completa"
+    }
+  },
+  "required": [
+    "giorno",
+    "edizione",
+    "payload"
+  ]
+}

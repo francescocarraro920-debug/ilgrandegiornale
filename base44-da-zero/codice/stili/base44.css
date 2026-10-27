@@ -1,0 +1,13 @@
+/* ======================================================================
+   Il Grande Giornale · aggiunte per la versione React su Base44 (da caricare DOPO app.css,
+   magazine.css e pop.css). Solo quello che cambia rispetto al sito di riferimento.
+   ====================================================================== */
+
+/* Il globo: in React i pulsanti + − ⟳ stanno in un contenitore insieme al globo (.globe__wrap),
+   che prende il posto in griglia che nel sito di riferimento aveva .globe__stage */
+.globe__wrap{grid-column:1/-1;position:relative;width:100%;max-width:640px;justify-self:center}
+.globe__wrap .globe__stage{max-width:none}
+@media (min-width:1024px){.globe__wrap{grid-column:6/span 7}}
+
+/* Base44 avvolge le pagine in un suo contenitore: il contenuto deve poter crescere come nel sito */
+#view{flex:1 0 auto;outline:none}
